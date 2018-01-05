@@ -1,0 +1,8 @@
+deepdream:
+  image: jupyter-caffe-cpu
+  net: host
+  ports:
+    - "8888:8888"
+  volumes:
+  - .:/src
+  working_dir: /src/
