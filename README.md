@@ -1,14 +1,47 @@
-# deepdream
+# Running deepdream with docker and jupyter notebook
 
-This repository contains IPython Notebook with sample code, complementing 
-Google Research [blog post](http://googleresearch.blogspot.ch/2015/06/inceptionism-going-deeper-into-neural.html) about Neural Network art.
-See [original gallery](https://photos.google.com/share/AF1QipPX0SCl7OzWilt9LnuQliattX4OUCj_8EP65_cTVnBmS1jnYgsGQAieQUc1VQWdgQ?key=aVBxWjhwSzg2RjJWLWRuVFBBZEN1d205bUdEMnhB) for more examples.
+## About
 
-You can view "dream.ipynb" directly on github, or clone the repository, 
-install dependencies listed in the notebook and play with code locally.
+The Dockerfile present in this repository will generate an image that combines:
+* the [bvlc/caffe:cpu](https://hub.docker.com/r/bvlc/caffe/) docker image,
+* the jupyter notebook app,
+* two GoogLeNet models:
+  * [BVLC GoogleNet model](https://github.com/BVLC/caffe/tree/master/models/bvlc_googlenet) trained on ImageNet,
+  * [Places205 GoogleNet model](http://places.csail.mit.edu/downloadCNN.html) trained on MIT's place dataset.
 
-It'll be interesting to see what imagery people are able to generate using the described technique. If you post images to Google+, Facebook, or Twitter, be sure to tag them with [#deepdream](https://twitter.com/hashtag/deepdream) so other researchers can check them out too.
+Google's deepdream notebook has been modified in order to use the local models and images.  
+Below you will find instructions on how to quickly try out google's deepdreams.
 
-* [Alexander Mordvintsev](mailto:moralex@google.com)
-* [Michael Tyka](https://www.twitter.com/mtyka)
-* [Christopher Olah](mailto:colah@google.com)
+## Dependencies
+
+* Git
+* [Docker Community Edition](https://www.docker.com/community-edition#/download)
+
+## Usage
+
+* Clone this repository
+
+    ```
+    $ git clone https://github.com/lorosanu/deepdream.git
+    $ cd deepdream
+    ```
+
+* Build the 'jupyter-caffe-cpu' Docker image
+
+    ```
+    $ docker build -t jupyter-caffe-cpu .
+    ```
+
+* Docker-compose launch
+
+    ```
+    $ docker-compose up
+
+      Copy/paste this URL into your browser when you connect for the first time,
+      to login with a token:
+        http://localhost:8888/?token=6a99...
+    ```
+
+* The jupyter notebook will be available at `http://localhost:8888/?token=6a99...`
+
+* __Note__: Mac and Windown users will have to find the IP address of docker-machine VM and replace 'localhost' with it. More [here](https://docs.docker.com/docker-for-windows/troubleshoot/#limitations-of-windows-containers-for-localhost-and-published-ports).
